@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Snowflake } from '@theinternetfolks/snowflake';
 import { CreateRoleDto } from 'src/common/dtos/role/create.dto';
 import { ValidationException } from 'src/common/exceptions/validation.exception';

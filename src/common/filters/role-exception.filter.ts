@@ -14,16 +14,19 @@ export class RoleExceptionFilter
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
 
-    const err: IValidationException = (
+    const errs: IValidationException[] = (
       exception.getResponse() as unknown as any
-    ).message[0] as IValidationException;
+    ).message as IValidationException[];
     const errors: IErrorResponseBody[] = [];
-    for (const prop in err.constraints) {
-      errors.push({
-        param: err.property,
-        message: err.constraints[prop],
-        code: err?.contexts[prop]?.code || Constants.GENERIC_CODE,
-      });
+    for (let i = 0; i < errs.length; i++) {
+      const err = errs[i];
+      for (const prop in err.constraints) {
+        errors.push({
+          param: err.property,
+          message: err.constraints[prop],
+          code: err?.contexts?.[prop]?.code || Constants.GENERIC_CODE,
+        });
+      }
     }
     response.status(status).json({
       status: false,
