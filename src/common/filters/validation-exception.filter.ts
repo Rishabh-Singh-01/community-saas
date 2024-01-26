@@ -6,7 +6,7 @@ import { IValidationException } from 'src/utils/interfaces/IValidationException'
 import { ValidationException } from '../exceptions/validation.exception';
 
 @Catch(ValidationException)
-export class RoleExceptionFilter
+export class ValidationExceptionFilter
   implements ExceptionFilter<ValidationException>
 {
   catch(exception: ValidationException, host: ArgumentsHost) {

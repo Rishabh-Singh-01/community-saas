@@ -11,13 +11,13 @@ import {
 import { CreateUserDto } from 'src/common/dtos/user/create.dto';
 import { AuthService } from './auth.service';
 import { IUserCreate, IUserGet } from 'src/utils/interfaces/IUser';
-import { RoleExceptionFilter } from 'src/common/filters/role-exception.filter';
+import { ValidationExceptionFilter } from 'src/common/filters/validation-exception.filter';
 import { SigninUserDto } from 'src/common/dtos/user/signin.dto';
 import { AuthGuard } from './guards/auth.guard';
 import { IUtilsUserFromRequest } from 'src/utils/interfaces/IUtils';
 
 @Controller('v1/auth')
-@UseFilters(RoleExceptionFilter)
+@UseFilters(ValidationExceptionFilter)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
