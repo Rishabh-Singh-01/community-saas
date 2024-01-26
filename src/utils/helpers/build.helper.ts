@@ -19,4 +19,20 @@ export class Build {
       },
     };
   }
+
+  // public static exclude<User, Key extends keyof User>(
+  //   user: User,
+  //   keys: Key[],
+  // ): Omit<User, Key> {
+  //   return Object.fromEntries(
+  //     Object.entries(user).filter(([key]) => !keys.includes(key)),
+  //   );
+  // }
+
+  public static exclude(user, ...keys) {
+    for (const key of keys) {
+      delete user[key];
+    }
+    return user;
+  }
 }
