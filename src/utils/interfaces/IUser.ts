@@ -15,3 +15,10 @@ export interface IUserCreate {
     meta: IMeta;
   };
 }
+
+export interface IUserGet {
+  status: boolean;
+  content: {
+    data: IData;
+  };
+}

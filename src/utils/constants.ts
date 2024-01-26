@@ -4,6 +4,7 @@ export class Constants {
   static readonly RESOURCE_EXISTS = 'RESOURCE_EXISTS';
   static readonly GENERIC_CODE = 'ERROR';
   static readonly INVALID_CREDENTIALS = 'INVALID_CREDENTIALS';
+  static readonly NOT_SIGNEDIN = 'NOT_SIGNEDIN';
 }
 
 export class ServiceConstants {
@@ -16,4 +17,5 @@ export class ServiceConstants {
   static readonly INPUT_OVER_TWO_CHARS = 'should be at least 2 characters.';
   static readonly INPUT_OVER_SIX_CHARS = 'should be at least 6 characters.';
   static readonly PASSWORD_SHOULD_BE_STRONG = 'Password should be strong.';
+  static readonly PROVIDE_SIGN_IN = 'You need to sign in to proceed.';
 }

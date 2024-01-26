@@ -16,9 +16,14 @@ export class UserService {
     });
   }
 
-  //   findOne(id: string) {
-  //     //
-  //   }
+  findById(id: string) {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async createUser({ email, name, password }: CreateUserDto) {
     const hashedPassword = await hashPasswordHelper(password);
     return this.prisma.user.create({

@@ -4,10 +4,11 @@ import { CreateUserDto } from 'src/common/dtos/user/create.dto';
 import { ValidationException } from 'src/common/exceptions/validation.exception';
 import { ServiceConstants, Constants } from 'src/utils/constants';
 import { Build } from 'src/utils/helpers/build.helper';
-import { IUserCreate } from 'src/utils/interfaces/IUser';
+import { IUserCreate, IUserGet } from 'src/utils/interfaces/IUser';
 import { JwtService } from '@nestjs/jwt';
 import { SigninUserDto } from 'src/common/dtos/user/signin.dto';
 import { comparePasswordHelper } from 'src/utils/helpers/manage-password.helper';
+import { IUtilsUserFromRequest } from 'src/utils/interfaces/IUtils';
 
 @Injectable()
 export class AuthService {
@@ -85,6 +86,17 @@ export class AuthService {
         meta: {
           access_token,
         },
+      },
+    };
+  }
+
+  async getUser({ sub }: IUtilsUserFromRequest): Promise<IUserGet> {
+    const user = await this.userService.findById(sub);
+    const userWithoutPassword = Build.exclude(user, 'password');
+    return {
+      status: true,
+      content: {
+        data: userWithoutPassword,
       },
     };
   }

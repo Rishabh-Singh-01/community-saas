@@ -1,9 +1,20 @@
-import { Body, Controller, HttpCode, Post, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseFilters,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/common/dtos/user/create.dto';
 import { AuthService } from './auth.service';
-import { IUserCreate } from 'src/utils/interfaces/IUser';
+import { IUserCreate, IUserGet } from 'src/utils/interfaces/IUser';
 import { RoleExceptionFilter } from 'src/common/filters/role-exception.filter';
 import { SigninUserDto } from 'src/common/dtos/user/signin.dto';
+import { AuthGuard } from './guards/auth.guard';
+import { IUtilsUserFromRequest } from 'src/utils/interfaces/IUtils';
 
 @Controller('v1/auth')
 @UseFilters(RoleExceptionFilter)
@@ -20,5 +31,12 @@ export class AuthController {
   @Post('signin')
   signin(@Body() userSignin: SigninUserDto): Promise<IUserCreate> {
     return this.authService.signin(userSignin);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getProfile(@Request() req): Promise<IUserGet> {
+    const user = req.user as IUtilsUserFromRequest;
+    return this.authService.getUser(user);
   }
 }
