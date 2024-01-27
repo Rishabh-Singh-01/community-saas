@@ -25,6 +25,7 @@ export class ServiceConstants {
   static readonly COMMUNITY_NOT_FOUND = 'Community not found.';
   static readonly USER_NOT_FOUND = 'User not found.';
   static readonly ROLE_NOT_FOUND = 'Role not found.';
+  static readonly MEMBER_NOT_FOUND = 'Member not found.';
   static readonly UNAUTH_PERFORM_ACTION =
     'You are not authorized to perform this action.';
 }

@@ -1,4 +1,4 @@
-import { IMemberCreate } from 'src/utils/interfaces/IMember';
+import { IMemberCreate, IMemberDelete } from 'src/utils/interfaces/IMember';
 import { IUtilsUserFromRequest } from 'src/utils/interfaces/IUtils';
 import { UserService } from '../user/user.service';
 import { ValidationException } from 'src/common/exceptions/validation.exception';
@@ -127,6 +127,34 @@ export class MemberService {
           ...newMember,
         },
       },
+    };
+  }
+
+  async deleteUsingId(id: string): Promise<IMemberDelete> {
+    const prevMember = await this.prisma.member.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!prevMember) {
+      const valErrs = [
+        Build.validationError(
+          'member',
+          ServiceConstants.MEMBER_NOT_FOUND,
+          Constants.RESOURCE_NOT_FOUND,
+        ),
+      ];
+      throw new ValidationException(valErrs);
+    }
+
+    await this.prisma.member.delete({
+      where: {
+        id,
+      },
+    });
+
+    return {
+      status: true,
     };
   }
 }

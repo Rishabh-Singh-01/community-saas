@@ -12,3 +12,7 @@ export interface IMemberCreate {
     data: IData;
   };
 }
+
+export interface IMemberDelete {
+  status: boolean;
+}

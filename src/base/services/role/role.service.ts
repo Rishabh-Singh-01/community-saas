@@ -19,15 +19,21 @@ export class RoleService {
     });
   }
 
-  async findAll(): Promise<IRoleGetAll> {
-    const roles = await this.prisma.role.findMany();
+  async findAll(pageNo?: string): Promise<IRoleGetAll> {
+    const { skip, page } = Build.paginate(pageNo);
+    const total = await this.prisma.role.count();
+    const pages = Math.ceil(total / Constants.DEFAULT_PAGINATION);
+    const roles = await this.prisma.role.findMany({
+      skip,
+      take: Constants.DEFAULT_PAGINATION,
+    });
     return {
       status: true,
       content: {
         meta: {
-          total: 2,
-          pages: 2,
-          page: 1,
+          total,
+          pages,
+          page,
         },
         data: roles,
       },

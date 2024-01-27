@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   Post,
+  Query,
   UseFilters,
 } from '@nestjs/common';
 import { RoleService } from 'src/base/services/role/role.service';
@@ -15,8 +16,8 @@ import { IRoleCreate, IRoleGetAll } from 'src/utils/interfaces/IRole';
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
   @Get()
-  findAll(): Promise<IRoleGetAll> {
-    return this.roleService.findAll();
+  findAll(@Query('page') page?: string): Promise<IRoleGetAll> {
+    return this.roleService.findAll(page);
   }
 
   @HttpCode(200)
