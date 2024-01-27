@@ -25,6 +25,28 @@ interface IDataWithOwner {
   updated_at: Date;
 }
 
+interface IDataWithMember {
+  id: string;
+  community: string;
+  user: {
+    id: string;
+    name: string;
+  };
+  role: {
+    id: string;
+    name: string;
+  };
+  created_at: Date;
+}
+
+export interface ICommunityGetAllCommunities {
+  status: boolean;
+  content: {
+    meta: IMeta;
+    data: IData[];
+  };
+}
+
 export interface ICommunityCreate {
   status: boolean;
   content: {
@@ -37,5 +59,13 @@ export interface ICommunityGetAll {
   content: {
     meta: IMeta;
     data: IDataWithOwner[];
+  };
+}
+
+export interface ICommunityGetAllMembers {
+  status: boolean;
+  content: {
+    meta: IMeta;
+    data: IDataWithMember[];
   };
 }

@@ -1,5 +1,5 @@
 export class Constants {
-  static readonly DEFAULT_PAGINATION = 2;
+  static readonly DEFAULT_PAGINATION = 1;
   static readonly INVALID_INPUT = 'INVALID_INPUT';
   static readonly RESOURCE_EXISTS = 'RESOURCE_EXISTS';
   static readonly GENERIC_CODE = 'ERROR';
