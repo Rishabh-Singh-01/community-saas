@@ -15,6 +15,7 @@ A project which satisfy the following assignment
 - Validations for each API must be carried out.
 - Using Typescript with proper interfaces
 - Using Cookies instead of Authorization Header
+  - Cookie uses the format `token=really_long_value_for_token_which_is_used_for_auth`
 - Using SQL-based Database with an ORM
 - Also, this does contain test file but they as of now are not implemented.
 
