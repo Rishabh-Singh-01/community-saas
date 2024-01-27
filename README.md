@@ -1,73 +1,64 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+### Description
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A project which satisfy the following assignment
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- You run a SaaS Platform that enables user to make their communities and add members to it.
+- Build different apis and solve the user story.
 
-## Description
+### Features Implemented
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- You need to build the APIs that adheres to above user stories.
+- The Role names are strict.
+- The API URLs and Response Structure is fixed.
+- The field attributes and table names are strict as well.
+- Addition of field for storing IDs when using NoSQL is allowed.
+- Validations for each API must be carried out.
+- Using Typescript with proper interfaces
+- Using Cookies instead of Authorization Header
+- Using SQL-based Database with an ORM
+- Also, this does contain test file but they as of now are not implemented.
 
-## Installation
+### Tech Stack
 
-```bash
+- NodeJs
+- Typescript
+- NestJs
+- MySql
+- Prisma
+
+## Steps to run
+
+- We are going to run our app locally as relatively easier to started with.
+- Clone the following [Github_Repo](https://github.com/Rishabh-Singh-01/community-saas). Follow this [Link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) to know more about how to clone.
+- cd into the corresponding directory.
+- install the dependencies.
+
+```
 $ npm install
 ```
 
-## Running the app
+- set up .env file in main directory with following variables
 
-```bash
-# development
+```
+DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
+JWT_SECRET_KEY="insert_your_jwt_key_here"
+HASH_ROUNDS=12
+```
+
+- The above env variables will help us get connected to mysql database which we could be hosting anywhere. One easy way to do that is to use docker mysql image to run a local server. Follow this [link](https://hub.docker.com/_/mysql) to set it up.
+- Make sure the database is configured and ready to be connected and make sure to have a db setup as per needs.
+- Run the app. It could be done in any way as per need.
+
+```
+# development mode
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+- Also, we need to sync prima schema using prisma migrate as we are in dev mode. Use another terminal, while leaving the server still on. Read more [here](https://www.prisma.io/docs/orm/prisma-migrate/getting-started).
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+prisma migrate dev --name init
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- This would migrate our schema to db. We can also verify the same after entering the sql server or container in case of docker.
+- Now, everything should be running okay on localhost server 3000.
