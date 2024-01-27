@@ -26,7 +26,7 @@ model Community{
   name  String  @db.VarChar(128)
   slug  String  @db.VarChar(255) @unique
   owner String
-  userRln  User  @relation(fields: [owner], references: [id])
+  userRln  User  @relation(fields: [owner], references: [id], onDelete: Cascade)
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
   members Member[]
@@ -43,10 +43,10 @@ model Role {
 model Member{
   id  String  @id
   community String
-  communityRln  Community @relation(fields: [community], references: [id])
+  communityRln  Community @relation(fields: [community], references: [id], onDelete: Cascade)
   user  String
-  userRln  User @relation(fields: [user], references: [id])
+  userRln  User @relation(fields: [user], references: [id], onDelete: Cascade)
   role  String
-  roleRln  Role @relation(fields: [role], references: [id])
+  roleRln  Role @relation(fields: [role], references: [id], onDelete: Cascade)
   created_at  DateTime  @default(now())
 }

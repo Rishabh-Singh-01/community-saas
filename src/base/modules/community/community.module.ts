@@ -8,5 +8,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
   imports: [PrismaModule, AuthModule],
   controllers: [CommunityController],
   providers: [CommunityService],
+  exports: [CommunityService],
 })
 export class CommunityModule {}

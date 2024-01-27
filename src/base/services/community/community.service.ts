@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Snowflake } from '@theinternetfolks/snowflake';
 import { CreateCommunityDto } from 'src/common/dtos/community/create.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Constants } from 'src/utils/constants';
+import { BusinessConstants, Constants } from 'src/utils/constants';
 import {
   ICommunityCreate,
   ICommunityGetAll,
@@ -26,12 +26,35 @@ export class CommunityService {
       },
     });
 
+    // Creating the community admin member from community creator user
+    const adminRole = await this.prisma.role.findFirst({
+      where: {
+        name: BusinessConstants.COMMUNITY_ADMIN,
+      },
+    });
+    await this.prisma.member.create({
+      data: {
+        id: Snowflake.generate(),
+        community: community.id,
+        user: sub,
+        role: adminRole.id,
+      },
+    });
+
     return {
       status: true,
       content: {
         data: community,
       },
     };
+  }
+
+  findById(id: string) {
+    return this.prisma.community.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   async findAll(pageNo?: string): Promise<ICommunityGetAll> {

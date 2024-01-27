@@ -11,6 +11,14 @@ import { IRoleCreate, IRoleGetAll } from 'src/utils/interfaces/IRole';
 export class RoleService {
   constructor(private readonly prisma: PrismaService) {}
 
+  findById(id: string) {
+    return this.prisma.role.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async findAll(): Promise<IRoleGetAll> {
     const roles = await this.prisma.role.findMany();
     return {
